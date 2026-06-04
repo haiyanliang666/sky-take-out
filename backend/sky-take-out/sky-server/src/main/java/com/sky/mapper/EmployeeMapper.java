@@ -35,4 +35,10 @@ public interface EmployeeMapper {
      */
 
     Page<Employee> pageQuery(EmployeePageQueryDTO employeePageQueryDTO);
+
+    /**
+     * Dynamically modify properties based on primary key
+     * @param employee
+     */
+    void update(Employee employee);
 }
