@@ -86,9 +86,9 @@ public class EmployeeController {
     }
 
     @GetMapping("/page")
-    @ApiOperation("employeePageQuery")
+    @ApiOperation("Employee Page Query")
     public Result<PageResult> page(EmployeePageQueryDTO employeePageQueryDTO){
-        log.info("employeePageQuery:{}",employeePageQueryDTO);
+        log.info("employee Page Query:{}",employeePageQueryDTO);
         PageResult pageResult = employeeService.pageQuery(employeePageQueryDTO);
         return Result.success(pageResult);
     }
@@ -100,7 +100,7 @@ public class EmployeeController {
      * @return
      */
     @PostMapping("/status/{status}")
-    @ApiOperation("startOrStopEmployeeAccount")
+    @ApiOperation("Start Or Stop Employee Account")
     public Result startOrStop(@PathVariable Integer status, Long id){
         log.info("startOrStopAccount:{},{}",status,id);
         employeeService.startOrStop(status, id);
