@@ -78,4 +78,31 @@ public class SetmealController {
         setmealService.deleteBatch(ids);
         return Result.success();
     }
+
+    /**
+     * Start or stop set meal
+     * @param status
+     * @param id
+     * @return
+     */
+    @PostMapping("/status/{status}")
+    @ApiOperation("Start or stop set meal")
+    public Result<String> startOrStop(@PathVariable("status") Integer status, Long id){
+        log.info("Start or stop by id: {}", id);
+        setmealService.startOrStop(status, id);
+        return Result.success();
+    }
+
+    /**
+     * Update Setmeal info
+     * @param setmealDTO
+     * @return
+     */
+    @PutMapping
+    @ApiOperation("Update Setmeal info")
+    public Result update(@RequestBody SetmealDTO setmealDTO){
+        log.info("Update Setmeal info:{}",setmealDTO);
+        setmealService.update(setmealDTO);
+        return Result.success();
+    }
 }

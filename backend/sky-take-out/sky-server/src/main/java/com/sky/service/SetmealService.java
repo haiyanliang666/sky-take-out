@@ -34,4 +34,19 @@ public interface SetmealService {
      * @param ids
      */
     void deleteBatch(List<Long> ids);
+
+
+    /**
+     * Start or stop set meal
+     * @param status
+     * @param id
+     */
+    void startOrStop(Integer status, Long id);
+
+
+    /**
+     * Update Setmeal info
+     * @param setmealDTO
+     */
+    void update(SetmealDTO setmealDTO);
 }

@@ -178,7 +178,7 @@ public class DishServiceImpl implements DishService {
             List<Long> dishIds = new ArrayList<>();
             dishIds.add(id);
 
-            //select setmealid from setmeal_dish where dish_id in (id,id,id...)
+            //select setmeal_id from setmeal_dish where dish_id in (id,id,id...)
             List<Long> setmealIds = setmealDishMapper.getSetmealIdsByDishIds(dishIds);
             if (setmealIds != null && setmealIds.size() > 0){
                 for (Long setmealId : setmealIds){
@@ -186,7 +186,6 @@ public class DishServiceImpl implements DishService {
                     setmealMapper.update(setmeal);
                 }
             }
-
         }
     }
 
