@@ -8,19 +8,23 @@ import com.sky.dto.DishDTO;
 import com.sky.dto.DishPageQueryDTO;
 import com.sky.entity.Dish;
 import com.sky.entity.DishFlavor;
+import com.sky.entity.Setmeal;
 import com.sky.exception.DeletionNotAllowedException;
 import com.sky.mapper.DishFlavorMapper;
 import com.sky.mapper.DishMapper;
 import com.sky.mapper.SetmealDishMapper;
+import com.sky.mapper.SetmealMapper;
 import com.sky.result.PageResult;
 import com.sky.service.DishService;
 import com.sky.vo.DishVO;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.javassist.expr.NewArray;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -33,6 +37,8 @@ public class DishServiceImpl implements DishService {
     private DishFlavorMapper dishFlavorMapper;
     @Autowired
     private SetmealDishMapper setmealDishMapper;
+    @Autowired
+    private SetmealMapper setmealMapper;
 
 //    public DishServiceImpl(DishMapper dishMapper, DishFlavorMapper dishFlavorMapper) {
 //        this.dishMapper = dishMapper;
@@ -156,6 +162,45 @@ public class DishServiceImpl implements DishService {
             //insert n rows to dish_flavor
             dishFlavorMapper.insertBatch(flavors);
         }
+    }
+
+    /**
+     * Start Or Stop Dish
+     * @param status
+     * @param id
+     */
+    public void startOrStop(Integer status, Long id) {
+        Dish dish = Dish.builder().id(id).status(status).build();
+        dishMapper.update(dish);
+
+        if (status == StatusConstant.DISABLE){
+            //if stop dish, also stop setmeal include dish
+            List<Long> dishIds = new ArrayList<>();
+            dishIds.add(id);
+
+            //select setmealid from setmeal_dish where dish_id in (id,id,id...)
+            List<Long> setmealIds = setmealDishMapper.getSetmealIdsByDishIds(dishIds);
+            if (setmealIds != null && setmealIds.size() > 0){
+                for (Long setmealId : setmealIds){
+                    Setmeal setmeal = Setmeal.builder().id(setmealId).status(status).build();
+                    setmealMapper.update(setmeal);
+                }
+            }
+
+        }
+    }
+
+    /**
+     * Get dishes by categoryId
+     * @param categoryId
+     * @return
+     */
+    public List<Dish> list(Long categoryId) {
+        Dish dish = Dish.builder()
+                .categoryId(categoryId)
+                .status(StatusConstant.ENABLE)
+                .build();
+        return dishMapper.list(dish);
     }
 
 

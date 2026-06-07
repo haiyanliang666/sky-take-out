@@ -59,4 +59,11 @@ public interface DishMapper {
      */
     @AutoFill(OperationType.UPDATE)
     void update(Dish dish);
+
+    /**
+     * Get dishes by categoryId
+     * @param dish
+     * @return
+     */
+    List<Dish> list(Dish dish);
 }

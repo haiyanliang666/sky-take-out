@@ -71,7 +71,7 @@ public class DishController {
      * get dish by id
      * @return
      */
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     @ApiOperation("Get dish by id")
     public Result<DishVO> getById(@PathVariable Long id){
         log.info("Get dish by id:{}",id);
@@ -94,6 +94,33 @@ public class DishController {
         //cleanCache("dish_*");
 
         return Result.success();
+    }
+
+    /**
+     * Start Or Stop Dish
+     * @param status
+     * @param id
+     * @return
+     */
+    @PostMapping("/status/{status}")
+    @ApiOperation("Start Or Stop Dish")
+    public Result<String> startOrStop(@PathVariable("status") Integer status, Long id){
+        log.info("Start Or Stop Dish:{}", id);
+        dishService.startOrStop(status, id);
+        return Result.success();
+    }
+
+    /**
+     * Get dishes by categoryId
+     * @param categoryId
+     * @return
+     */
+    @GetMapping("/list")
+    @ApiOperation("Get dishes by categoryId")
+    public Result<List<Dish>> list(Long categoryId){
+        log.info("Get dish by categoryId:{}",categoryId);
+        List<Dish> list = dishService.list(categoryId);
+        return Result.success(list);
     }
 }
 
