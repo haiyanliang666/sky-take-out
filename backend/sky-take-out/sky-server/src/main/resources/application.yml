@@ -16,6 +16,11 @@ spring:
     multipart:
       max-file-size: 10MB
       max-request-size: 10MB
+  redis:
+    host: ${sky.redis.host}
+    port: ${sky.redis.port}
+    password: ${sky.redis.password}
+    database: ${sky.redis.database}
 
 mybatis:
   #mapper配置文件
@@ -41,6 +46,9 @@ sky:
     admin-ttl: 7200000
     # 设置前端传递过来的令牌名称
     admin-token-name: token
+    user-secret-key: itheima
+    user-ttl: 7200000
+    user-token-name: authentication
   alioss:
     endpoint: ${sky.alioss.endpoint}
     access-key-id: ${sky.alioss.access-key-id}
@@ -53,3 +61,13 @@ sky:
       access-key-id: ${sky.aws.s3.access-key-id}
       secret-access-key: ${sky.aws.s3.secret-access-key}
       public-url: ${sky.aws.s3.public-url}
+  wechat:
+    appid: ${sky.wechat.appid}
+    secret: ${sky.wechat.secret}
+#    mchid: ${sky.wechat.mchid}
+#    mchSerialNo: ${sky.wechat.mchSerialNo}
+#    privateKeyFilePath: ${sky.wechat.privateKeyFilePath}
+#    apiV3Key: ${sky.wechat.apiV3Key}
+#    weChatPayCertFilePath: ${sky.wechat.weChatPayCertFilePath}
+#    notifyUrl: ${sky.wechat.notifyUrl}
+#    refundNotifyUrl: ${sky.wechat.refundNotifyUrl}
