@@ -1,0 +1,7 @@
+# macOS
+.DS_Store
+
+# nginx local runtime files
+logs/
+sky-error.log
+sky-nginx.pid
