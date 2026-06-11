@@ -1,0 +1,42 @@
+# macOS
+.DS_Store
+**/.DS_Store
+
+# IDE local metadata
+.idea/
+*.iml
+
+# Java build output
+target/
+**/target/
+
+# JavaScript dependencies and source maps
+node_modules/
+node-modules/
+**/node_modules/
+**/node-modules/
+*.map
+
+# Local application configuration and secrets
+application-local.yml
+**/application-local.yml
+*.local.yml
+*.local.yaml
+.env
+.env.*
+
+# Certificates and private keys
+*.pem
+*.key
+*.p12
+*.jks
+
+# Runtime logs and process ids
+*.log
+*.pid
+logs/
+**/logs/
+
+# WeChat DevTools local project config
+mp-weixin/project.config.json
+mp-weixin/project.private.config.json

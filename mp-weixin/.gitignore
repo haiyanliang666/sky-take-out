@@ -15,3 +15,4 @@ node_modules/
 
 # WeChat DevTools local project config
 project.config.json
+project.private.config.json
